@@ -1,6 +1,6 @@
 import enum
 
-from db import db
+from app import db
 
 from sqlalchemy.sql import func
 
@@ -36,9 +36,9 @@ class CarColorChoices(enum.Enum):
 
 class Car(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    model = db.Column(db.Enum(CarModelChoices))
-    color = db.Column(db.Enum(CarColorChoices))
-    available = db.Column(db.Boolean, default=False)
+    model = db.Column(db.Enum(CarModelChoices), nullable=False)
+    color = db.Column(db.Enum(CarColorChoices), nullable=False)
+    available = db.Column(db.Boolean, default=False, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('owner.id'),
                          nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),
