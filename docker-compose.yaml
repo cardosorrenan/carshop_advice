@@ -3,9 +3,9 @@ version: "3.9"
 services:
 
   db:
-    env_file: .env
     image: postgres:14-alpine
-    container_name: db
+    env_file: .env
+    container_name: ${POSTGRES_HOST}
     hostname: ${POSTGRES_HOST}
     volumes:
       - data_db:/var/lib/postgresql/data
@@ -22,10 +22,11 @@ services:
   api:
     build: .
     container_name: api
+    env_file: .env
     command: >
         sh -c "python manage.py create_db
                python manage.py seed_db
-               flask run"
+               flask --app app --debug run --host=0.0.0.0"
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_USER=${POSTGRES_USER}

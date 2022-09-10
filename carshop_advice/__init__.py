@@ -1,1 +1,1 @@
-from carshop_advice import models
+from carshop_advice import *

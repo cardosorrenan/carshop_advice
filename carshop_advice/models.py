@@ -1,8 +1,8 @@
 import enum
 
-from app import db
-
 from sqlalchemy.sql import func
+
+from db import db
 
 
 class Owner(db.Model):

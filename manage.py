@@ -20,6 +20,7 @@ def seed_db():
                          email="armin_ronacher@flask.com",
                          age=33))
     db.session.commit()
+    
     db.session.add(Car(model="HATCH",
                        color="BLUE",
                        available=True,
