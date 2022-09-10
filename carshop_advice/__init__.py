@@ -1,1 +1,0 @@
-from carshop_advice import *

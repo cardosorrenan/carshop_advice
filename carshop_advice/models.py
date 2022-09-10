@@ -23,15 +23,15 @@ class Owner(db.Model):
       
     
 class CarModelChoices(enum.Enum):
-    HATCH = "Hatch"
-    SEDAN = "Sedan"
-    CONVERTIBLE = "Convertible"
+    Hatch = "Hatch"
+    Sedan = "Sedan"
+    Convertible = "Convertible"
 
 
 class CarColorChoices(enum.Enum):
-    BLUE = "Blue"
-    GRAY = "Gray"
-    YELLOW = "Yellow"
+    Blue = "Blue"
+    Gray = "Gray"
+    Yellow = "Yellow"
 
 
 class Car(db.Model):
@@ -49,4 +49,4 @@ class Car(db.Model):
 
 
     def __repr__(self):
-        return f'<Car {self.model}({self.color})>'
+        return f'<Car {self.id}({self.owner_id})>'

@@ -9,10 +9,10 @@ from db import db
 from auth.models import User
 
 
-auth = Blueprint("auth", __name__, url_prefix="/api/auth/")
+authorization = Blueprint("auth", __name__, url_prefix="/api/auth/")
 
 
-@auth.post('login/')
+@authorization.post('login/')
 def login():
     email = request.json.get("email", "")
     password = request.json.get("password", "")
@@ -35,7 +35,7 @@ def login():
                     }), 200
 
 
-@auth.post('register/')
+@authorization.post('register/')
 def register():
     username = request.json['username']
     email = request.json['email']

@@ -1,10 +1,11 @@
 from flask.cli import FlaskGroup
+from flask import current_app
 
-from app import app, db
+from db import db
 from carshop_advice.models import Owner, Car
 
 
-cli = FlaskGroup(app)
+cli = FlaskGroup(current_app)
 
 @cli.command("create_db")
 def create_db():
@@ -17,20 +18,24 @@ def create_db():
 def seed_db():
     db.session.add(Owner(firstname="Armin",
                          lastname="Ronacher",
-                         email="armin_ronacher@flask.com",
+                         email="armin@flask.com",
                          age=33))
+    db.session.add(Owner(firstname="Guido",
+                         lastname="Van Rossum",
+                         email="guido@python.com",
+                         age=66))
     db.session.commit()
     
-    db.session.add(Car(model="HATCH",
-                       color="BLUE",
+    db.session.add(Car(model="Hatch",
+                       color="Blue",
                        available=True,
                        owner_id=1))
-    db.session.add(Car(model="CONVERTIBLE",
-                       color="YELLOW",
+    db.session.add(Car(model="Convertible",
+                       color="Yellow",
                        available=False,
                        owner_id=1))
-    db.session.add(Car(model="SEDAN",
-                       color="GRAY",
+    db.session.add(Car(model="Sedan",
+                       color="Gray",
                        available=True,
                        owner_id=1))
     db.session.commit()
