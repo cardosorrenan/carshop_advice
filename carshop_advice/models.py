@@ -1,5 +1,6 @@
 import enum
 
+from flask_restful import abort
 from sqlalchemy.sql import func
 
 from db import db
@@ -47,6 +48,21 @@ class Car(db.Model):
                            server_default=func.now(),
                            server_onupdate=db.func.now())
 
+    def check_max_cars_by_owner(self, owner_id):
+        owner_cars = self.query.filter_by(owner_id=owner_id).count()
+        if owner_cars >= 3:
+            abort(400, message="Owner can have up to 3 cars")
+
+    def __init__(self, **kwargs):
+        owner_id = kwargs.get('owner_id')
+        self.check_max_cars_by_owner(owner_id)
+        super().__init__(**kwargs)
+            
+    def __setattr__(self, attr, value):
+        if attr == 'owner_id':
+            self.check_max_cars_by_owner(value)
+        super().__setattr__(attr, value)
+        
 
     def __repr__(self):
-        return f'<Car {self.id}({self.owner_id})>'
+        return f'<Car {self.id}>'
