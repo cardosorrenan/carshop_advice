@@ -9,6 +9,8 @@ Nork-Town is a weird place. Crows cawk the misty morning while old men squint. I
 - Car owners may not have cars yet, they need to be marked as a sale opportunity. 
 - Cars cannot exist in the system without owners.
 
+---
+
 ### Setup
 ```
 git clone https://github.com/cardosorrenan/carshop_advice.git
@@ -21,6 +23,16 @@ docker-compose up --build
 ### Docs
 ```
 http://localhost:5000/apidocs/#/
+```
+
+### How docs
+```
+1. Open swagger http://localhost:5000/apidocs/#/
+2. Register a user
+3. Login user and copy the access key
+4. Paste in the Authorization header field in every request you are going to use
+5. Example: Authorization: Bearer {access key}
+6. Try it out
 ```
 
 ### Run Tests
