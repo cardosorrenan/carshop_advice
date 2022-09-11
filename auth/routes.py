@@ -49,12 +49,6 @@ def register():
     user = User(username=username, password=pwd_hash, email=email)
     db.session.add(user)
     db.session.commit()
-    
-    refresh = create_refresh_token(identity=user.id)
-    access = create_access_token(identity=user.id)
 
-    return jsonify({'refresh': refresh,
-                    'access': access,
-                    'username': user.username,
-                    'email': user.email
-                    }), 201
+    return jsonify({'username': user.username,
+                    'email': user.email}), 201

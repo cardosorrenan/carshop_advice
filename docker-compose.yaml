@@ -24,8 +24,7 @@ services:
     container_name: api
     env_file: .env
     command: >
-        sh -c "python manage.py create_db
-               python manage.py seed_db
+        sh -c "python manage.py renew_db
                flask --app app --debug run --host=0.0.0.0"
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST}

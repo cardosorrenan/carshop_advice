@@ -3,19 +3,20 @@ from flask import current_app
 
 from db import db
 from carshop_advice.models import Owner, Car
+from auth.models import User
+
+from werkzeug.security import generate_password_hash
 
 
 cli = FlaskGroup(current_app)
 
-@cli.command("create_db")
-def create_db():
+@cli.command("renew_db")
+def renew_db():
     db.drop_all()
     db.create_all()
-    db.session.commit()
-
-        
-@cli.command("seed_db")
-def seed_db():
+    db.session.add(User(username="usertest",
+                        password=generate_password_hash("1234"),
+                        email="user@test.com"))
     db.session.add(Owner(firstname="Armin",
                          lastname="Ronacher",
                          email="armin@flask.com",

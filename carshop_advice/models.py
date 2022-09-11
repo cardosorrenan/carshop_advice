@@ -60,7 +60,9 @@ class Car(db.Model):
             
     def __setattr__(self, attr, value):
         if attr == 'owner_id':
-            self.check_max_cars_by_owner(value)
+            owner_id = value
+            if self.owner_id != owner_id:
+                self.check_max_cars_by_owner(owner_id)
         super().__setattr__(attr, value)
         
 
