@@ -11,20 +11,21 @@ Nork-Town is a weird place. Crows cawk the misty morning while old men squint. I
 
 ### Setup
 ```
+git clone https://github.com/cardosorrenan/carshop_advice.git
+
+cd /carshop_advice
+
 docker-compose up --build
 ```
 
 ### Docs
 ```
-
+http://localhost:5000/apidocs/#/
 ```
 
 ### Run Tests
 ```
+docker exec -it api bash
 
+pytest
 ```
-
-##### Next steps
-- Documentation
-- Database to Testing
-- Create sales microservice

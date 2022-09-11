@@ -1,0 +1,38 @@
+Update Owner
+---
+tags:
+  - Owner
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+  - in: path
+    name: id
+    type: integer
+    required: true
+  - in: body
+    name: body
+    description: The body should contain the owner data
+    required: true
+    schema:
+      type: object
+      properties:
+        model:
+          type: "string"
+          example: "Convertible"
+        color:
+          type: "string"
+          example: "Blue"
+        owner_id:
+          type: "integer"
+          example: 2
+        available:
+          type: "boolean"
+          example: true
+
+responses:
+  200:
+    description: Update an owner's specific data
+  401:
+    description: Fails to get items due to authentication error

@@ -4,12 +4,14 @@ from flask.json import jsonify
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
 from flask import Flask
+from flasgger import Swagger
 
 from db import db
 from auth.routes import authorization
 from config import Config
-from carshop_advice.resources import ResourceOwner, ResourceCars
-
+from carshop_advice.resources import ResourceCar, ResourceOwner, \
+                                     ResourceCars, ResourceOwners
+from swagger import template
 
 def create_app():
     # Setup App
@@ -25,9 +27,16 @@ def create_app():
 
     # Resources
     api = Api(app)
-    api.add_resource(ResourceOwner, '/api/owners/', '/api/owners/<int:id>/')
-    api.add_resource(ResourceCars, '/api/cars/', '/api/cars/<int:id>/')
 
+    api.add_resource(ResourceOwners, '/api/owners/')
+    api.add_resource(ResourceOwner, '/api/owners/<int:id>/')
+    
+    api.add_resource(ResourceCars, '/api/cars/')
+    api.add_resource(ResourceCar, '/api/cars/<int:id>/')
+
+    # Docs
+    Swagger(app, template=template)
+    
     # Generic Pages
     @app.errorhandler(404)
     def handle_404(e):

@@ -1,0 +1,19 @@
+List Cars
+---
+tags:
+  - Car
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+  - in: query
+    name: availables
+    type: boolean
+    example: true
+
+responses:
+  200:
+    description: Return all cars
+  401:
+    description: Fails to get items due to authentication error

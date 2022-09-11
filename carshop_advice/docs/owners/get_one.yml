@@ -1,0 +1,19 @@
+Get one owner
+---
+tags:
+  - Owner
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+  - in: path 
+    name: id
+    type: integer
+    required: true
+
+responses:
+  200:
+    description: Owner specific data
+  401:
+    description: Fails to get items due to authentication error

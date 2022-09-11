@@ -1,0 +1,39 @@
+Create Owner
+---
+tags:
+  - Owner
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+  - in: body
+    name: body
+    description: The body should contain the owner data
+    required: true
+    schema:
+      type: object
+      required:
+        - "firstname"
+        - "lastname"
+        - "email"
+        - "age"
+      properties:
+        firstname:
+          type: "string"
+          example: "User"
+        lastname:
+          type: "string"
+          example: "Test"
+        email:
+          type: "email"
+          example: "user@test.com"
+        age:
+          type: "integer"
+          example: 33
+
+responses:
+  201:
+    description: When an owner was successfully created
+  400:
+    description: Fails to create due to bad request data
