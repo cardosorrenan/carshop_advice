@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: postgres:14-alpine
+    env_file: .env
+    container_name: ${POSTGRES_HOST}
+    hostname: ${POSTGRES_HOST}
+    volumes:
+      - data_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    networks:
+      - carshop-network
+
+  api:
+    build: .
+    container_name: api
+    env_file: .env
+    command: >
+        sh -c "python manage.py renew_db
+               flask --app app --debug run --host=0.0.0.0"
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - .:/app/
+    links:
+      - db:db
+    ports:
+      - "5000:5000"
+    networks:
+      - carshop-network
+    depends_on:
+      - db
+
+volumes:
+  data_db:
+
+networks:
+  carshop-network:
+    driver: bridge

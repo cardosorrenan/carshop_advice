@@ -1,0 +1,39 @@
+Create Car
+---
+tags:
+  - Car
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+  - in: body
+    name: body
+    description: The body should contain the car data
+    required: true
+    schema:
+      type: object
+      required:
+        - "model"
+        - "color"
+        - "owner_id"
+        - "available"
+      properties:
+        model:
+          type: "string"
+          example: "Convertible"
+        color:
+          type: "string"
+          example: "Blue"
+        owner_id:
+          type: "integer"
+          example: 2
+        available:
+          type: "boolean"
+          example: true
+
+responses:
+  201:
+    description: When an car was successfully created
+  400:
+    description: Fails to create due to bad request data
